@@ -242,309 +242,304 @@ const Result = () => {
     }
 
     return (
+    
         <Container className="home-content mt-5">
+        {/* Loading Modal */}
+        <Modal show={isLoading} centered>
+            <Modal.Body className='custom-content'>
+                <div className="loading-container">
+                    <div className="spinner" />
+                    <p>Please Wait...</p>
+                </div>
+            </Modal.Body>
+        </Modal>
 
-<Modal  show={isLoading} centered>
-                <Modal.Body className='custom-content'>
-                    <div className="loading-container">
-                        <div className="spinner" />
-                        <p>Please Wait...</p>
-                    </div>
-                </Modal.Body>
-            </Modal>
-
-            {!isLoading && (
-                <>
-                
-            <div style={{ textAlign: 'right', marginBottom: '10px' }}>
-                <Button onClick={handleDownload} className="submit-btn" style={{ marginRight: '10px' }}>
-                    <FaDownload style={{ marginRight: '5px' }} /> Download 
-                </Button>
-                <Button onClick={handleShare} className="submit-btn">
-                    <FaShareAlt style={{ marginRight: '5px' }} /> Share
-                </Button>
-            </div>
-
-           
-
-            
-            <div ref={tableRef}>
-                <h2>{comparisonData.map((product, index) => index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName)}</h2>
-                {/* Comparison Table */}
-                <table cellPadding="10">
-                    <thead>
-                        <tr>
-                            <th style={{ textAlign: 'center' }}>Feature</th>
-                            {comparisonData.map((product, index) => (
-                                <th key={index}>{product.productName}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody style={{ textAlign: 'center' }}>
-                        {comparisonData[0]?.specifications && Object.keys(comparisonData[0].specifications).map((category) => (
-                            <React.Fragment key={category}>
-                                {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
-                                    <tr style={{ backgroundColor: 'transparent', color: 'whitesmoke' }} key={`${category}-${feature}`}>
-                                        <td style={{color: 'whitesmoke'}}>{feature}</td>
-                                        {comparisonData.map((product, index) => (
-                                            <td key={index}>{product.specifications[category]?.[feature] || 'N/A'}</td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </React.Fragment>
-                        ))}
-                    </tbody>
-                </table>
-
-                <h2>Pricing and Suggestions</h2>
-                <table cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Amazon</th>
-                            <th>Flipkart</th>
-                            <th>Offers</th>
-                            <th>Recommendation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {comparisonData.map((product, index) => (
-                            <tr key={index}>
-                                <td style={{color: 'whitesmoke'}}>{product.productName}</td>
-                                <td>{product.priceandsuggestion?.price}</td>
-                                <td>
-                                    <a href={product.priceandsuggestion?.amazonLink} target="_blank" rel="noopener noreferrer">
-                                        <img src="/amazon.svg" alt="Amazon" style={{ width: '20px', marginRight: '8px', backgroundColor: 'whitesmoke' }} />
-                                        Amazon
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href={product.priceandsuggestion?.flipkartLink} target="_blank" rel="noopener noreferrer">
-                                        <img src="https://static-assets-web.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico" alt="Flipkart" style={{ width: '20px', marginRight: '8px' }} />
-                                        Flipkart
-                                    </a>
-                                </td>
-                                <td>{product.priceandsuggestion?.offers}</td>
-                                <td>{product.priceandsuggestion?.recommendation}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <small 
-    style={{
-        fontStyle: 'italic',
-        fontFamily: 'Poppins, sans-serif',
-        display: 'block',
-        textAlign: 'center',
-        marginTop: '20px',
-        color: 'whitesmoke',
-        fontSize: '0.9rem'
-    }}
->
-    Note: This data was created by AI and might have some errors.
-</small>
-
-            </div>
-
-           
-            <Modal show={showModal} onHide={handleCloseModal} centered dialogClassName="custom-share-modal">
-    <Modal.Header  style={{
-            backgroundColor: 'black',
-            borderColor: 'whitesmoke',
-            position: 'relative',
-            borderTopLeftRadius: '15px',
-            borderTopRightRadius: '15px',
-        }}>
-        <Modal.Title>
-            <FaLink style={{ marginRight: '8px' }} /> Share with Your Friends!
-        </Modal.Title>
-        <Button
-    variant="close"
-    onClick={() => setShowModal(false)}
-    style={{
-        position: 'absolute',
-        right: '15px',
-        top: '20px',
-        backgroundColor: 'transparent',
-        borderRadius: '50%', // Makes the button round
-        width: '40px', // Fixed width
-        height: '40px', // Fixed height
-        border: 'none', // Remove border
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '0', // Remove default padding
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', // Add subtle shadow for depth
-        
-    }}
->
-    <span aria-hidden="true" style={{ backgroundColor: 'transparent', color: 'whitesmoke', fontSize: '2.5rem' }}>×</span> {/* Close icon */}
-</Button>
-    </Modal.Header>
-    <Modal.Body>
-        <div style={{ display: 'flex', gap: '10px' }}>
-            <input type="text" readOnly value={shareLink} style={{
-                    width: '100%',
-                    padding: '10px 15px',
-                    borderRadius: '8px',
-                    backgroundColor: '#333',
-                    color: 'whitesmoke',
-                    border: '1px solid #555',
-                    fontFamily: 'Poppins, sans-serif',
-                    marginTop: '5px',
-                }} />
-                 <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip id="copy-tooltip">Copy to Clipboard</Tooltip>}
-        >
-            <Button onClick={copyToClipboard} style={{
-    color: 'white',
-    textDecoration: 'none',
-    top:'20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '50px', // Set a fixed width
-    height: '50px', // Set a fixed height
-    borderRadius: '50%', // Ensures it's a perfect circle
-    backgroundColor: 'transparent',
-    border: '2px solid whitesmoke',
-    transition: 'background-color 0.3s, color 0.3s, border-color 0.3s',
-}}>
-                <FaCopy style={{ color: 'whitesmoke' }} />
+        {/* Content When Not Loading */}
+        {!isLoading && (
+    <>
+        <div style={{ textAlign: 'right', marginBottom: '10px' }}>
+            <Button onClick={handleDownload} className="submit-btn" style={{ marginRight: '10px' }}>
+                <FaDownload style={{ marginRight: '5px' }} /> Download
             </Button>
-        </OverlayTrigger>
+            <Button onClick={handleShare} className="submit-btn">
+                <FaShareAlt style={{ marginRight: '5px' }} /> Share
+            </Button>
         </div>
-    </Modal.Body>
-    <Modal.Footer
-    style={{
-        backgroundColor: 'black',
-        borderColor: 'whitesmoke',
-        position: 'relative',   
-        borderBottomLeftRadius: '15px',
-        borderBottomRightRadius: '15px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        paddingBottom: '10px',
-        borderTop: 'none'
-    }}
->
-    <div style={{ display: 'flex', gap: '35px' }}>
-        <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip id="whatsapp-tooltip">WhatsApp</Tooltip>}
-        >
-            <a
-                href={`https://wa.me/?text=${encodeURIComponent(
-                    `${comparisonData
-                      .map((product, index) => 
-                        index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
-                      )
-                      .join('') // Join the product names without spaces
-                      } - Comparison Read More Details: ${shareLink}`
-                  )}`}                  
-                target="_blank"
-                rel="noopener noreferrer"
+
+        {/* Comparison Table */}
+        <div ref={tableRef}>
+            <h2>
+                {comparisonData.map((product, index) =>
+                    index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
+                )}
+            </h2>
+            <table cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                    <tr>
+                        <th style={{ textAlign: 'center', color: 'whitesmoke' }}>Feature</th>
+                        {comparisonData.map((product, index) => (
+                            <th key={index} style={{ color: 'whitesmoke' }}>{product.productName}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody style={{ textAlign: 'center' }}>
+                    {comparisonData[0]?.specifications && Object.keys(comparisonData[0].specifications).map((category) => (
+                        <React.Fragment key={category}>
+                            {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
+                                <tr key={`${category}-${feature}`} style={{ backgroundColor: 'transparent', color: 'whitesmoke' }}>
+                                    <td style={{ color: 'whitesmoke' }}>{feature}</td>
+                                    {comparisonData.map((product, index) => (
+                                        <td key={index}>{product.specifications[category]?.[feature] || 'N/A'}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </React.Fragment>
+                    ))}
+                </tbody>
+            </table>
+
+            {/* Pricing and Suggestions Table */}
+            <h2>Pricing and Suggestions</h2>
+            <table cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', tableLayout:'auto' }}>
+    <thead>
+        <tr>
+            <th style={{ color: 'whitesmoke' }}>Name And Price</th>
+            <th style={{ color: 'whitesmoke' }}>Links</th>
+            <th style={{ color: 'whitesmoke' }}>Suggestions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {comparisonData.map((product, index) => (
+            <tr key={index}>
+                <td>
+                    ({product.productName}) {product.priceandsuggestion?.price || 'N/A'}
+                </td>
+                <td>
+                    {/* Amazon Link and Flipkart Link Combined in One Cell */}
+                    {product.priceandsuggestion?.amazonLink || product.priceandsuggestion?.flipkartLink ? (
+                        <>
+                            {product.priceandsuggestion?.amazonLink && (
+                                <a href={product.priceandsuggestion?.amazonLink} target="_blank" rel="noopener noreferrer">
+                                    <img
+                                        src="/amazon.svg"
+                                        alt="Amazon"
+                                        style={{ width: '20px', marginRight: '8px', backgroundColor: 'whitesmoke' }}
+                                    />
+                                    Amazon
+                                </a>
+                            )}
+                            {product.priceandsuggestion?.amazonLink && product.priceandsuggestion?.flipkartLink && ' | '}
+                            {product.priceandsuggestion?.flipkartLink && (
+                                <a
+                                    href={product.priceandsuggestion?.flipkartLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <img
+                                        src="https://static-assets-web.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico"
+                                        alt="Flipkart"
+                                        style={{ width: '20px', marginRight: '8px' }}
+                                    />
+                                    Flipkart
+                                </a>
+                            )}
+                        </>
+                    ) : (
+                        'N/A'
+                    )}
+                </td>
+                <td>{product.priceandsuggestion?.recommendation || 'N/A'}</td>
+            </tr>
+        ))}
+    </tbody>
+</table>
+
+            <small
                 style={{
-                    color: 'white',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'transparent',
-                    border: '2px solid whitesmoke',
-                    transition: 'background-color 0.3s, color 0.3s, border-color 0.3s'
+                    fontStyle: 'italic',
+                    fontFamily: 'Poppins, sans-serif',
+                    display: 'block',
+                    textAlign: 'center',
+                    marginTop: '20px',
+                    color: 'whitesmoke',
+                    fontSize: '0.9rem'
                 }}
-                className="social-icon"
             >
-                <FaWhatsapp style={{ fontSize: '1.5rem' }} />
-            </a>
-        </OverlayTrigger>
+                Note: This data was generated by AI and may contain errors, including incorrect purchase links.
+            </small>
+        </div>
 
-        <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip id="facebook-tooltip">Facebook</Tooltip>}
-        >
-            <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}&quote=${encodeURIComponent(
-                    `${comparisonData
-                      .map((product, index) => 
-                        index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
-                      )
-                      .join('') // Join the product names without spaces
-                      } - Comparison Read More Details: ${shareLink}`
-                  )}`}
-                target="_blank"
-                rel="noopener noreferrer"
+        {/* Share Modal */}
+        <Modal show={showModal} onHide={handleCloseModal} centered dialogClassName="custom-share-modal">
+            <Modal.Header
                 style={{
-                    color: 'white',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'transparent',
-                    border: '2px solid whitesmoke',
-                    transition: 'background-color 0.3s, color 0.3s, border-color 0.3s'
-                }}
-                className="social-icon"
-            >
-                <FaFacebookF style={{ fontSize: '1.5rem' }} />
-            </a>
-        </OverlayTrigger>
-
-        <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip id="twitter-tooltip">Twitter (X)</Tooltip>}
-        >
-            <a
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareLink)}&text=${encodeURIComponent(
-                    `${comparisonData
-                      .map((product, index) => 
-                        index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
-                      )
-                      .join('') // Join the product names without spaces
-                      } - Comparison Read More Details: ${shareLink}`
-                  )}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                    backgroundColor: 'black',
+                    borderColor: 'whitesmoke',
+                    position: 'relative',
+                    borderTopLeftRadius: '15px',
+                    borderTopRightRadius: '15px',
+                }}>
+                <Modal.Title>
+                    <FaLink style={{ marginRight: '8px' }} /> Share with Your Friends!
+                </Modal.Title>
+                <Button
+                    variant="close"
+                    onClick={handleCloseModal}
+                    style={{
+                        position: 'absolute',
+                        right: '15px',
+                        top: '20px',
+                        backgroundColor: 'transparent',
+                        borderRadius: '50%',
+                        width: '40px',
+                        height: '40px',
+                        border: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '0',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                    }}>
+                    <span aria-hidden="true" style={{ backgroundColor: 'transparent', color: 'whitesmoke', fontSize: '2.5rem' }}>×</span>
+                </Button>
+            </Modal.Header>
+            <Modal.Body>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <input type="text" readOnly value={shareLink} style={{
+                        width: '100%',
+                        padding: '10px 15px',
+                        borderRadius: '8px',
+                        backgroundColor: '#333',
+                        color: 'whitesmoke',
+                        border: '1px solid #555',
+                        fontFamily: 'Poppins, sans-serif',
+                        marginTop: '5px',
+                    }} />
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="copy-tooltip">Copy to Clipboard</Tooltip>}>
+                        <Button onClick={copyToClipboard} style={{
+                            color: 'white',
+                            textDecoration: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '50px',
+                            height: '50px',
+                            borderRadius: '50%',
+                            backgroundColor: 'transparent',
+                            border: '2px solid whitesmoke',
+                        }}>
+                            <FaCopy style={{ color: 'whitesmoke' }} />
+                        </Button>
+                    </OverlayTrigger>
+                </div>
+            </Modal.Body>
+            <Modal.Footer
                 style={{
-                    color: 'white',
-                    textDecoration: 'none',
+                    backgroundColor: 'black',
+                    borderColor: 'whitesmoke',
+                    borderBottomLeftRadius: '15px',
+                    borderBottomRightRadius: '15px',
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'transparent',
-                    border: '2px solid whitesmoke',
-                    transition: 'background-color 0.3s, color 0.3s, border-color 0.3s'
-                }}
-                className="social-icon"
-            >
-                <FaTwitter style={{ fontSize: '1.5rem' }} />
-            </a>
-        </OverlayTrigger>
-    </div>
-</Modal.Footer>
-</Modal>
-
-                </>
-            )}
-
-        </Container>
+                    paddingBottom: '10px',
+                    borderTop: 'none'
+                }}>
+                <div style={{ display: 'flex', gap: '35px' }}>
+                    {/* Social Media Share Buttons */}
+                    {/* WhatsApp */}
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="whatsapp-tooltip">WhatsApp</Tooltip>}>
+                        <a
+                            href={`https://wa.me/?text=${encodeURIComponent(
+                                `${comparisonData
+                                    .map((product, index) =>
+                                        index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
+                                    )
+                                    .join('')} - Comparison Read More Details: ${shareLink}`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                color: 'white',
+                                textDecoration: 'none',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '50%',
+                                backgroundColor: 'transparent',
+                                border: '2px solid whitesmoke',
+                            }}>
+                            <FaWhatsapp style={{ fontSize: '1.5rem' }} />
+                        </a>
+                    </OverlayTrigger>
+                    {/* Facebook */}
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="facebook-tooltip">Facebook</Tooltip>}>
+                        <a
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                color: 'white',
+                                textDecoration: 'none',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '50%',
+                                backgroundColor: 'transparent',
+                                border: '2px solid whitesmoke',
+                            }}>
+                            <FaFacebookF style={{ fontSize: '1.5rem' }} />
+                        </a>
+                    </OverlayTrigger>
+                    {/* Twitter */}
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="twitter-tooltip">Twitter</Tooltip>}>
+                        <a
+                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareLink)}&text=${encodeURIComponent(
+                                `${comparisonData
+                                    .map((product, index) =>
+                                        index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
+                                    )
+                                    .join('')} - Comparison Read More Details: `
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                color: 'white',
+                                textDecoration: 'none',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '50%',
+                                backgroundColor: 'transparent',
+                                border: '2px solid whitesmoke',
+                            }}>
+                            <FaTwitter style={{ fontSize: '1.5rem' }} />
+                        </a>
+                    </OverlayTrigger>
+                </div>
+            </Modal.Footer>
+        </Modal>
+    </>
+)}
+    </Container>
 
         
     );
 };
 
 export default Result;
+// updated on 14-11-2024
