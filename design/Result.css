@@ -60,60 +60,63 @@ body {
     display: block;
 }
 
-/* Overall table container */
-table {
-    width: 100%;
-    max-width: 100%;
+/* Table container with overflow handling */
+.table-wrapper {
+    overflow-x: auto; /* Horizontal scroll on small screens */
     margin: 20px auto;
-    background-color: transparent;
-    border-spacing: 0 10px; /* Space between rows for rounded effect */
-    border-radius: 12px; /* Rounded corners for the table itself */
-    overflow: hidden; /* Prevents overflow for rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
-    border: 1px solid whitesmoke; /* Border color for the entire table */
-    table-layout: fixed; /* Ensure table scales down on mobile */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Table header styling */
-thead th {
-    padding: 12px;
-    background-color: transparent; /* Dark background for header */
-    color: whitesmoke;
+/* Main table styling */
+table {
+  
+    border-collapse: collapse;
+    background-color: transparent;
     border: 1px solid whitesmoke;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table header */
+thead th {
+    padding: 12px 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: whitesmoke;
     text-align: center;
     font-weight: bold;
-    overflow-wrap: break-word; /* Ensure long text breaks properly */
+    border: 1px solid whitesmoke;
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Ensure long text breaks properly */
 }
 
-/* Table body styling */
+/* Table rows and columns */
 tbody td {
     padding: 10px;
-    background-color: transparent;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
     color: whitesmoke;
     border: 1px solid whitesmoke;
-    text-align: center;
-    word-wrap: break-word; /* Break long words to prevent overflow */
+    word-break: break-word; /* Ensure text does not overflow */
 }
 
-/* Row styling */
-tbody tr {
-    background-color: transparent;
-    border-radius: 8px; /* Rounded corners for each row */
-}
-
-
-
-
+/* Responsive handling for smaller screens */
 @media (max-width: 768px) {
-    table {
-        width: 100%;
+    thead th {
+        font-size: 0.9rem;
+        padding: 10px 5px;
     }
 
-    th, td {
-        text-align: center;
-        padding: 8px;
+    tbody td {
+        font-size: 0.9rem;
+        padding: 10px 5px;
     }
 }
+
+
+
+
+
 
 /* Custom button styling */
 .submit-btn {
