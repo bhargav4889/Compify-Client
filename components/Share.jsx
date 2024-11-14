@@ -158,11 +158,7 @@ const Share = () => {
                         <>
                             {product.priceandsuggestion?.amazonLink && (
                                 <a href={product.priceandsuggestion?.amazonLink} target="_blank" rel="noopener noreferrer">
-                                    <img
-                                        src="/amazon.svg"
-                                        alt="Amazon"
-                                        style={{ width: '20px', marginRight: '8px', backgroundColor: 'whitesmoke' }}
-                                    />
+
                                     Amazon
                                 </a>
                             )}
@@ -173,11 +169,7 @@ const Share = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <img
-                                        src="https://static-assets-web.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico"
-                                        alt="Flipkart"
-                                        style={{ width: '20px', marginRight: '8px' }}
-                                    />
+                                    
                                     Flipkart
                                 </a>
                             )}
@@ -386,4 +378,3 @@ const Share = () => {
 };
 
 export default Share;
-// updated on 14/11/2024
