@@ -267,107 +267,106 @@ const Result = () => {
         </div>
 
         {/* Comparison Table */}
-        <div ref={tableRef}>
-            <h2>
-                {comparisonData.map((product, index) =>
-                    index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
-                )}
-            </h2>
-            <table cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr>
-                        <th style={{ textAlign: 'center', color: 'whitesmoke' }}>Feature</th>
-                        {comparisonData.map((product, index) => (
-                            <th key={index} style={{ color: 'whitesmoke' }}>{product.productName}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody style={{ textAlign: 'center' }}>
-                    {comparisonData[0]?.specifications && Object.keys(comparisonData[0].specifications).map((category) => (
-                        <React.Fragment key={category}>
-                            {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
-                                <tr key={`${category}-${feature}`} style={{ backgroundColor: 'transparent', color: 'whitesmoke' }}>
-                                    <td style={{ color: 'whitesmoke' }}>{feature}</td>
-                                    {comparisonData.map((product, index) => (
-                                        <td key={index}>{product.specifications[category]?.[feature] || 'N/A'}</td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </React.Fragment>
-                    ))}
-                </tbody>
-            </table>
-
-            {/* Pricing and Suggestions Table */}
-            <h2>Pricing and Suggestions</h2>
-            <table cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', tableLayout:'auto' }}>
-    <thead>
-        <tr>
-            <th style={{ color: 'whitesmoke' }}>Name And Price</th>
-            <th style={{ color: 'whitesmoke' }}>Links</th>
-            <th style={{ color: 'whitesmoke' }}>Suggestions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {comparisonData.map((product, index) => (
-            <tr key={index}>
-                <td>
-                    ({product.productName}) {product.priceandsuggestion?.price || 'N/A'}
-                </td>
-                <td>
-                    {/* Amazon Link and Flipkart Link Combined in One Cell */}
-                    {product.priceandsuggestion?.amazonLink || product.priceandsuggestion?.flipkartLink ? (
-                        <>
-                            {product.priceandsuggestion?.amazonLink && (
-                                <a href={product.priceandsuggestion?.amazonLink} target="_blank" rel="noopener noreferrer">
-                                    <img
-                                        src="/amazon.svg"
-                                        alt="Amazon"
-                                        style={{ width: '20px', marginRight: '8px', backgroundColor: 'whitesmoke' }}
-                                    />
-                                    Amazon
-                                </a>
-                            )}
-                            {product.priceandsuggestion?.amazonLink && product.priceandsuggestion?.flipkartLink && ' | '}
-                            {product.priceandsuggestion?.flipkartLink && (
-                                <a
-                                    href={product.priceandsuggestion?.flipkartLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <img
-                                        src="https://static-assets-web.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico"
-                                        alt="Flipkart"
-                                        style={{ width: '20px', marginRight: '8px' }}
-                                    />
-                                    Flipkart
-                                </a>
-                            )}
-                        </>
-                    ) : (
-                        'N/A'
-                    )}
-                </td>
-                <td>{product.priceandsuggestion?.recommendation || 'N/A'}</td>
+        <div ref={tableRef} className="table-wrapper">
+    <h2 style={{ textAlign: 'center', color: 'whitesmoke' }}>
+        {comparisonData.map((product, index) =>
+            index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
+        )}
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                {comparisonData.map((product, index) => (
+                    <th key={index}>{product.productName}</th>
+                ))}
             </tr>
-        ))}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {comparisonData[0]?.specifications &&
+                Object.keys(comparisonData[0].specifications).map((category) => (
+                    <React.Fragment key={category}>
+                        {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
+                            <tr key={`${category}-${feature}`}>
+                                <td data-label="Feature">{feature}</td>
+                                {comparisonData.map((product, index) => (
+                                    <td key={index} data-label={product.productName}>
+                                        {product.specifications[category]?.[feature] || 'N/A'}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </React.Fragment>
+                ))}
+        </tbody>
+    </table>
 
-            <small
-                style={{
-                    fontStyle: 'italic',
-                    fontFamily: 'Poppins, sans-serif',
-                    display: 'block',
-                    textAlign: 'center',
-                    marginTop: '20px',
-                    color: 'whitesmoke',
-                    fontSize: '0.9rem'
-                }}
-            >
-                Note: This data was generated by AI and may contain errors, including incorrect purchase links.
-            </small>
-        </div>
+    {/* Pricing and Suggestions Table */}
+    {/* Pricing and Suggestions Table */}
+<h2 style={{ textAlign: 'center', color: 'whitesmoke' }}>Pricing and Suggestions</h2>
+<div className="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th style={{ minWidth: '150px' }}>Name and Price</th>
+                <th style={{ minWidth: '200px' }}>Links</th>
+                <th style={{ minWidth: '200px' }}>Suggestions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {comparisonData.map((product, index) => (
+                <tr key={index}>
+                    <td data-label="Name and Price">
+                        {product.productName} - {product.priceandsuggestion?.price || 'N/A'}
+                    </td>
+                    <td data-label="Links">
+                        {product.priceandsuggestion?.amazonLink && (
+                            <a
+                                href={product.priceandsuggestion?.amazonLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#1e90ff' }}
+                            >
+                                Amazon
+                            </a>
+                        )}
+                        {product.priceandsuggestion?.amazonLink && product.priceandsuggestion?.flipkartLink && ' | '}
+                        {product.priceandsuggestion?.flipkartLink && (
+                            <a
+                                href={product.priceandsuggestion?.flipkartLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#1e90ff' }}
+                            >
+                                Flipkart
+                            </a>
+                        )}
+                    </td>
+                    <td data-label="Suggestions">
+                        {product.priceandsuggestion?.recommendation || 'N/A'}
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
+
+
+    <small
+        style={{
+            fontStyle: 'italic',
+            fontFamily: 'Poppins, sans-serif',
+            display: 'block',
+            textAlign: 'center',
+            marginTop: '20px',
+            color: 'whitesmoke',
+            fontSize: '0.9rem'
+        }}
+    >
+        Note: This data was generated by AI and may contain errors, including incorrect purchase links.
+    </small>
+</div>
+
 
         {/* Share Modal */}
         <Modal show={showModal} onHide={handleCloseModal} centered dialogClassName="custom-share-modal">
@@ -542,4 +541,3 @@ const Result = () => {
 };
 
 export default Result;
-// updated on 14-11-2024
