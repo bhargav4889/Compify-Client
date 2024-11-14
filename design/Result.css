@@ -3,101 +3,11 @@ body {
     background-color: #2c2c2c; /* Dark background for contrast */
     color: whitesmoke;
     font-family: Poppins, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
-/* Overall table container */
-table {
-    width: 100%;
-    margin: 20px auto;
-    background-color: transparent;
-    border-spacing: 0 10px; /* Space between rows for rounded effect */
-    border-radius: 12px; /* Rounded corners for the table itself */
-    overflow: hidden; /* Prevents overflow for rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
-    border: 1px solid white; /* Border color for the entire table */
-}
-
-/* Table header styling */
-thead th {
-    padding: 12px;
-    background-color: #333; /* Dark background for header */
-    color: whitesmoke;
-    border: 1px solid whitesmoke;
-    text-align: center;
-    font-weight: bold;
-    border-top-left-radius: 12px; /* Top left rounded corner */
-    border-top-right-radius: 12px; /* Top right rounded corner */
-}
-
-/* Table body styling */
-tbody td {
-    padding: 10px;
-    background-color: transparent;
-    color: whitesmoke;
-    border: 1px solid whitesmoke;
-    text-align: center;
-}
-
-/* Row styling */
-tbody tr {
-    background-color: transparent;
-    border-radius: 8px; /* Rounded corners for each row */
-}
-
-/* Add spacing between rows to emphasize rounded corners */
-tbody tr + tr {
-    margin-top: 8px;
-}
-
-/* Apply rounded corners to the first and last cells in each row */
-tbody tr td:first-child {
-    font-weight: bold;
-    text-align: left;
-    color: red; /* Highlight category or main feature */
-    border-left: 1px solid whitesmoke;
-}
-
-tbody tr td:last-child {
-    border-right: 1px solid whitesmoke;
-}
-
-/* Rounded borders for individual cells */
-th, td {
-    border-radius: 8px;
-}
-
-/* Alternate row colors for better readability */
-tbody tr:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* Hover effect for rows */
-tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.submit-btn {
-    border-radius: 20px;
-    background-color: transparent;
-    border: 2px solid whitesmoke;
-    color: whitesmoke;
-    font-weight: bold;
-    font-family: Poppins, sans-serif;
-    transition: all 0.3s ease;
-}
-
-
-.submit-btn:hover {
-    background-color: whitesmoke;
-    color: black;
-    border-color: whitesmoke;
-    font-family: Poppins, sans-serif;
-   
-}
 
 .custom-sad-emoji {
     display: inline-block;
@@ -143,6 +53,86 @@ tbody tr:hover {
 }
 
 
+.responsive-table-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    width: 100%;
+    display: block;
+}
+
+/* Overall table container */
+table {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    background-color: transparent;
+    border-spacing: 0 10px; /* Space between rows for rounded effect */
+    border-radius: 12px; /* Rounded corners for the table itself */
+    overflow: hidden; /* Prevents overflow for rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
+    border: 1px solid whitesmoke; /* Border color for the entire table */
+    table-layout: fixed; /* Ensure table scales down on mobile */
+}
+
+/* Table header styling */
+thead th {
+    padding: 12px;
+    background-color: transparent; /* Dark background for header */
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    font-weight: bold;
+    overflow-wrap: break-word; /* Ensure long text breaks properly */
+}
+
+/* Table body styling */
+tbody td {
+    padding: 10px;
+    background-color: transparent;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+/* Row styling */
+tbody tr {
+    background-color: transparent;
+    border-radius: 8px; /* Rounded corners for each row */
+}
+
+
+
+
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+}
+
+/* Custom button styling */
+.submit-btn {
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid whitesmoke;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: Poppins, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: whitesmoke;
+    color: black;
+    border-color: whitesmoke;
+}
+
+/* Custom share modal styling */
 .custom-share-modal {
     max-width: 400px;
     margin: auto;
@@ -152,47 +142,41 @@ tbody tr:hover {
 }
 
 .custom-share-modal .modal-content {
-    background-color: black;
     border-radius: 15px;
     border: 1px solid whitesmoke;
 }
 
-/* Centered loading container with whitesmoke background */
+/* Loading spinner style */
 .loading-container {
     display: flex;
-    flex-direction: row; /* Align items in a row */
-    align-items: center; /* Vertically center the items */
-    justify-content: center; /* Horizontally center the items */
-    text-align: center; /* Center the text */
-    padding: 20px; /* Add some padding inside the modal */
-    background-color: whitesmoke; /* Set the background color to whitesmoke */
-    border-radius: 10px; /* Rounded corners */
-    
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: whitesmoke;
+    border-radius: 10px;
 }
 
-/* Spinner style with blue color */
 .spinner {
-    width: 25px; /* Smaller spinner size */
-    height: 25px; /* Same height as width for a perfect circle */
+    width: 25px;
+    height: 25px;
     border: 4px solid lightgray;
-    border-top: 4px solid blue; /* Set spinner color to blue */
+    border-top: 4px solid black;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-right: 10px; /* Space between the spinner and text */
+    margin-right: 10px;
 }
 
-/* Text styling with black color */
 .loading-container p {
-    font-size: 16px; /* Smaller font size to match the smaller spinner */
-    color: black; /* Set the text color to black */
+    font-size: 16px;
+    color: whitesmoke;
+    font-family: Poppins, sans-serif;
     margin: 0;
 }
 
-/* Spinner animation */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
-
-
