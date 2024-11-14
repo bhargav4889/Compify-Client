@@ -9,6 +9,7 @@ import axios from 'axios';
 const Compare = () => {
     const [productType, setProductType] = useState("default");
     const [numberOfItems, setNumberOfItems] = useState("default");
+    const [selectedProducts, setSelectedProducts] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [modalShow, setModalShow] = useState(false);
     const [selectedProductIndex, setSelectedProductIndex] = useState(null);
@@ -45,7 +46,18 @@ const Compare = () => {
             setProductExists(false);
             return;
         }
-        
+    
+        // Check if the product with the same brand and model already exists
+        const isDuplicate = selectedProducts.some(
+            (product) => product.brand === brand && product.modelName === modelName
+        );
+    
+        if (isDuplicate) {
+            setMessage({ text: 'This product has already been selected for comparison.', color: 'red', background: 'transparent' });
+            setProductExists(false);
+            return;
+        }
+    
         setLoading(true); // Start loading state
         setMessage({ text: 'Validating product... Please wait...', color: 'whitesmoke', background: 'transparent' });
     
@@ -68,6 +80,8 @@ const Compare = () => {
     
             if (exists) {
                 setMessage({ text: 'Product exists', color: 'green', background: 'transparent' });
+                // Optionally add product to the selected list if it passes validation
+                setSelectedProducts([...selectedProducts, { brand, modelName }]);
             } else {
                 setMessage({ text: 'Error: Product not found or validation failed.', color: 'red', background: 'transparent' });
             }
@@ -78,7 +92,6 @@ const Compare = () => {
             setMessage({ text: 'Error: Unable to validate product. Please try again later.', color: 'red', background: 'transparent' });
         }
     };
-    
 
 
     const handleSaveProductData = () => {
@@ -543,3 +556,4 @@ const Compare = () => {
 };
 
 export default Compare;
+// update on 14/11/2024 
