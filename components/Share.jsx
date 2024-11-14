@@ -18,7 +18,7 @@ const Share = () => {
         const shareID = queryParams.get("id");
 
         if (shareID) {
-            fetch(`'https://compify-api.onrender.com/v1/share/share-comparison/${shareID}`)
+            fetch(`https://compify-api.onrender.com/v1/share/share-comparison/${shareID}`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Data not found');
