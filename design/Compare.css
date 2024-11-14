@@ -1,0 +1,91 @@
+.dotted-rectangle {
+    border: 3px dotted white; /* Dotted border */
+    flex: 1 1 calc(50% - 20px); /* Dynamic flex basis for responsiveness */
+    height: 200px; /* Fixed height for larger size */
+    margin: 10px; /* Margin for spacing */
+    display: flex; /* Center the plus icon */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    position: relative; /* Position for absolute positioning of plus icon */
+}
+
+.plus-icon {
+    font-size: 3rem; /* Size of the plus icon */
+    color: white; /* Color of the plus icon */
+}
+
+@media (max-width: 768px) {
+    .dotted-rectangle {
+        flex: 1 1 calc(100% - 20px); /* Full width for small screens */
+        height: 150px; /* Adjust height for smaller screens */
+    }
+}
+
+.custom-modal {
+    border-radius: 15px; /* Makes the entire modal rounded */
+    border: 1px solid whitesmoke; /* Whitesmoke border color */
+}
+
+.modal-content {
+    background-color: black; /* Ensuring the modal content is black */
+    border-radius: 15px; /* Rounded corners for modal content */
+}
+
+.submit-btn {
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid whitesmoke;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: Poppins, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:disabled {
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid whitesmoke;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: Poppins, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: whitesmoke;
+    color: black;
+    border-color: whitesmoke;
+    font-family: 'Poppins, sans-serif';
+   
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: whitesmoke;
+    font-family: 'Poppins, sans-serif';
+}
+
+.product-brand, .product-model {
+    margin-bottom: 5px;
+}
+
+.delete-btn {
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins, sans-serif';
+}
+
+.delete-btn:hover {
+    background-color: red;
+    color: white;
+}

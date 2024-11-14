@@ -1,0 +1,145 @@
+/* General Content Styling */
+.home-content {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Hero Section Styling */
+.hero-section {
+  background-color: black;
+  color: whitesmoke;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Introduction and Section Headings */
+.introduction-section h2,
+.features-section h4,
+.popular-comparisons h2,
+.testimonials-section h2 {
+  color: #007bff;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Key Features Section */
+.features-section .card {
+  background-color: whitesmoke;
+  color: black;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  text-align: center;
+}
+
+.features-section .card:hover {
+  transform: translateY(-5px);
+}
+
+/* Product Dropdown Styling */
+.product-item-dropdown {
+  appearance: none; /* Removes default arrow for customization */
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  border: 1px solid #000; /* Border color */
+  border-radius: 15px; /* Rounded corners */
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  width: 100%; /* Adjust width as needed */
+  color: whitesmoke; /* Text color */
+  position: relative;
+  padding-right: 30px; /* Space for custom arrow */
+}
+
+/* Hover effect for dropdown */
+.product-item-dropdown:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Optional: Down Arrow for Dropdown */
+.product-item-dropdown::after {
+  content: '\25BC'; /* Unicode character for down arrow */
+  position: absolute;
+  right: 15px;
+  color: whitesmoke;
+  pointer-events: none;
+}
+
+/* Popular Comparisons Section */
+.card {
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 20px; /* Rounded corners */
+  background-color: white; /* White background */
+  color: white; /* White text */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+.card-body h5,
+.card-body p {
+  color: black; /* Ensure text is white */
+}
+
+.card-body {
+  background-color: transparent; /* White background inside card */
+}
+
+/* Optional: Add a slight background color on hover */
+.card:hover {
+  background-color: #f8f9fa; /* Subtle light background on hover */
+}
+
+.responsive-heading {
+  color: whitesmoke;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  min-height: 2.5rem; /* Adjust this based on the line height */
+}
+
+@media (min-width: 1200px) {
+  .responsive-heading {
+      font-size: 2.5rem;
+      min-height: 3rem; /* Extra space for desktop */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .responsive-heading {
+      font-size: 2.2rem;
+      min-height: 2.8rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .responsive-heading {
+      font-size: 2rem;
+      min-height: 2.6rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .responsive-heading {
+      font-size: 1.8rem;
+      min-height: 2.4rem;
+  }
+}
+
+/* Footer Styling */
+.footer-section {
+  color: whitesmoke;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}

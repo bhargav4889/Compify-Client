@@ -1,0 +1,53 @@
+/* Navbar.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    background-color: black; /* Dark background for contrast */
+    z-index: 1000; /* Ensures navbar stays above other content */
+}
+
+.custom-nav-link {
+    font-size: 18px;
+    font-weight: 400;
+    color: #ffffff;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease, font-weight 0.3s ease;
+}
+
+.custom-nav-link.active {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.custom-nav-link:hover {
+    color: #1e90ff;
+    transform: translateY(-3px);
+}
+
+.custom-nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    background-color: #1e90ff;
+    transition: width 0.3s ease;
+}
+
+.custom-nav-link:hover::after {
+    width: 100%;
+}
+
+.custom-nav-link {
+    margin-right: 15px;
+}
+
+.custom-nav-link:last-child {
+    margin-right: 0;
+}

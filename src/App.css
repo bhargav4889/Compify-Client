@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.main-content {
+  padding-top: 75px; /* Ensures main content starts below navbar */
+}
+
+.compare-content {
+  padding-top: 75px; /* Ensures main content starts below navbar */
+}
+.about-content {
+  padding-top: 50px; /* Ensures main content starts below navbar */
+}
+.result-content {
+  padding-top: 75px; /* Ensures main content starts below navbar */
+}
+.share-content {
+  padding-top: 75px; /* Ensures main content starts below navbar */
+}

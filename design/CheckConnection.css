@@ -1,0 +1,21 @@
+.custom--modal .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto; /* Ensures dialog doesn't take full width */
+    max-width: 400px; /* Sets a maximum width */
+}
+
+.custom--modal .modal-content {
+    background-color: #333;
+    border-radius: 15px;
+    border: 2px solid whitesmoke;
+    text-align: center;
+    width: 100%; /* Allows modal content to adapt to max-width of dialog */
+    padding: 1rem;
+}
+
+.custom--modal .modal-header {
+    border-bottom: none;
+    justify-content: center;
+}
