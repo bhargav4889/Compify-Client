@@ -282,7 +282,7 @@ const Result = () => {
                 ))}
             </tr>
         </thead>
-       <tbody>
+       <tbody style = {{textAlign: 'center'}}>
     {comparisonData[0]?.specifications &&
         Object.keys(comparisonData[0].specifications).map((category) => (
             <React.Fragment key={category}>
