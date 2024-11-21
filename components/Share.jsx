@@ -120,20 +120,30 @@ const Share = () => {
                                 ))}
                             </tr>
                         </thead>
-                        <tbody style={{ textAlign: 'center' }}>
-                            {comparisonData[0]?.specifications && Object.keys(comparisonData[0].specifications).map((category) => (
-                                <React.Fragment key={category}>
-                                    {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
-                                        <tr style={{ backgroundColor: 'transparent', color: 'whitesmoke' }} key={`${category}-${feature}`}>
-                                            <td style={{ color: 'whitesmoke' }}>{feature}</td>
-                                            {comparisonData.map((product, index) => (
-                                                <td key={index}>{product.specifications[category]?.[feature] || 'N/A'}</td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </React.Fragment>
-                            ))}
-                        </tbody>
+                       <tbody style = {{textAlign: 'center'}}>
+    {comparisonData[0]?.specifications &&
+        Object.keys(comparisonData[0].specifications).map((category) => (
+            <React.Fragment key={category}>
+                {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
+                    <tr key={`${category}-${feature}`}>
+                        <td data-label="Feature">{feature}</td>
+                        {comparisonData.map((product, index) => {
+                            const value = product.specifications[category]?.[feature];
+                            return (
+                                <td key={index} data-label={product.productName}>
+                                    {/* Handle objects gracefully */}
+                                    {typeof value === 'object' && value !== null
+                                        ? JSON.stringify(value) // or a custom formatter
+                                        : value || 'N/A'}
+                                </td>
+                            );
+                        })}
+                    </tr>
+                ))}
+            </React.Fragment>
+        ))}
+</tbody>
+
                     </table>
 
                     {/* Pricing and Suggestions Table */}
