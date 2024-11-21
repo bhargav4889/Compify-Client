@@ -282,26 +282,31 @@ const Result = () => {
                 ))}
             </tr>
         </thead>
-        <tbody>
-            {comparisonData[0]?.specifications &&
-                Object.keys(comparisonData[0].specifications).map((category) => (
-                    <React.Fragment key={category}>
-                        {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
-                            <tr key={`${category}-${feature}`}>
-                                <td data-label="Feature">{feature}</td>
-                                {comparisonData.map((product, index) => (
-                                    <td key={index} data-label={product.productName}>
-                                        {product.specifications[category]?.[feature] || 'N/A'}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </React.Fragment>
+       <tbody>
+    {comparisonData[0]?.specifications &&
+        Object.keys(comparisonData[0].specifications).map((category) => (
+            <React.Fragment key={category}>
+                {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
+                    <tr key={`${category}-${feature}`}>
+                        <td data-label="Feature">{feature}</td>
+                        {comparisonData.map((product, index) => {
+                            const value = product.specifications[category]?.[feature];
+                            return (
+                                <td key={index} data-label={product.productName}>
+                                    {/* Handle objects gracefully */}
+                                    {typeof value === 'object' && value !== null
+                                        ? JSON.stringify(value) // or a custom formatter
+                                        : value || 'N/A'}
+                                </td>
+                            );
+                        })}
+                    </tr>
                 ))}
-        </tbody>
+            </React.Fragment>
+        ))}
+</tbody>
     </table>
 
-    {/* Pricing and Suggestions Table */}
     {/* Pricing and Suggestions Table */}
 <h2 style={{ textAlign: 'center', color: 'whitesmoke' }}>Pricing and Suggestions</h2>
 <div className="table-wrapper">
