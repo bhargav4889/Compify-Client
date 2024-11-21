@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Modal } from 'react-bootstrap';
 import { FaDownload, FaShareAlt, FaCopy, FaLink, FaWhatsapp, FaInstagram, FaFacebookF,FaTwitter   } from 'react-icons/fa';
+import { toPng } from 'html-to-image';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import '../design/Result.css';      
 import axios from 'axios';
