@@ -24,7 +24,7 @@ const Home = () => {
               />
             </h1>
             <p className="lead text">Discover, compare, and decide on the perfect products effortlessly.</p>
-            <Button className="submit-btn" size="lg" href="/compare?ref_source=home">Start Comparing Now</Button>
+            <Button className="submit-btn" size="lg" href="/compare?ref_source=home&v=v1">Start Comparing Now</Button>
           </Col>
         </Row>
 
