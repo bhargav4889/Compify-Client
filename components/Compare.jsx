@@ -133,7 +133,7 @@ const Compare = () => {
             queryParams.append('type', productType);
             queryParams.append('items', numberOfItems);
             
-            window.open(`/result?${queryParams.toString()}`, '_blank');
+            window.open(`/result?v=v1&${queryParams.toString()}`, '_blank');
             window.location.reload();
         } catch (error) {
             console.error("Error fetching comparison data:", error);
