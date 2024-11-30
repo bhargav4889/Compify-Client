@@ -26,9 +26,15 @@ const CustomNavbar = () => {
             <Nav.Link className="custom-nav-link">Home</Nav.Link>
           </LinkContainer>
           
-         <LinkContainer to="/compare?v=v1" onClick={() => setExpanded(false)}>
-             <Nav.Link className="custom-nav-link">Let's Compare!</Nav.Link>
-         </LinkContainer>
+        <LinkContainer 
+  to={{
+    pathname: "/compare",
+    search: "?v=v1"
+  }}
+  onClick={() => setExpanded(false)}
+>
+  <Nav.Link className="custom-nav-link">Let's Compare!</Nav.Link>
+</LinkContainer>
 
           
           <LinkContainer to="/about" onClick={() => setExpanded(false)}>
