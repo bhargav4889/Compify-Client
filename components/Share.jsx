@@ -111,89 +111,94 @@ const Share = () => {
                 {/* Comparison Table */}
                 <div ref={tableRef}>
                     <h2>{comparisonData.map((product, index) => index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName)}</h2>
-                    <table cellPadding="10">
-                        <thead>
-                            <tr>
-                                <th style={{ textAlign: 'center' }}>Feature</th>
-                                {comparisonData.map((product, index) => (
-                                    <th key={index}>{product.productName}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                       <tbody style = {{textAlign: 'center'}}>
-    {comparisonData[0]?.specifications &&
-        Object.keys(comparisonData[0].specifications).map((category) => (
-            <React.Fragment key={category}>
-                {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
-                    <tr key={`${category}-${feature}`}>
-                        <td data-label="Feature">{feature}</td>
-                        {comparisonData.map((product, index) => {
-                            const value = product.specifications[category]?.[feature];
-                            return (
-                                <td key={index} data-label={product.productName}>
-                                    {/* Handle objects gracefully */}
-                                    {typeof value === 'object' && value !== null
-                                        ? JSON.stringify(value) // or a custom formatter
-                                        : value || 'N/A'}
-                                </td>
-                            );
-                        })}
-                    </tr>
+                   <div className="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th style={{ minWidth: '150px' }}>Feature</th>
+                {comparisonData.map((product, index) => (
+                    <th key={index} style={{ minWidth: '200px' }}>{product.productName}</th>
                 ))}
-            </React.Fragment>
-        ))}
-</tbody>
+            </tr>
+        </thead>
+        <tbody>
+            {comparisonData[0]?.specifications &&
+                Object.keys(comparisonData[0].specifications).map((category) => (
+                    <React.Fragment key={category}>
+                        {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
+                            <tr key={`${category}-${feature}`}>
+                                <td data-label="Feature" style={{ fontWeight: 'bold' }}>{feature}</td>
+                                {comparisonData.map((product, index) => {
+                                    const value = product.specifications[category]?.[feature];
+                                    return (
+                                        <td
+                                            key={index}
+                                            data-label={product.productName}
+                                            style={{ textAlign: 'center' }}
+                                        >
+                                            {typeof value === 'object' && value !== null
+                                                ? JSON.stringify(value)
+                                                : value || 'N/A'}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                    </React.Fragment>
+                ))}
+        </tbody>
+    </table>
+</div>
 
-                    </table>
 
                     {/* Pricing and Suggestions Table */}
-                    <h2>Pricing and Suggestions</h2>
-            <table cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', tableLayout:'auto' }}>
-    <thead>
-        <tr>
-            <th style={{ color: 'whitesmoke' }}>Name And Price</th>
-            <th style={{ color: 'whitesmoke' }}>Links</th>
-            <th style={{ color: 'whitesmoke' }}>Suggestions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {comparisonData.map((product, index) => (
-            <tr key={index}>
-                <td>
-                    ({product.productName}) {product.priceandsuggestion?.price || 'N/A'}
-                </td>
-                <td>
-                    {/* Amazon Link and Flipkart Link Combined in One Cell */}
-                    {product.priceandsuggestion?.amazonLink || product.priceandsuggestion?.flipkartLink ? (
-                        <>
-                            {product.priceandsuggestion?.amazonLink && (
-                                <a href={product.priceandsuggestion?.amazonLink} target="_blank" rel="noopener noreferrer">
-
-                                    Amazon
-                                </a>
-                            )}
-                            {product.priceandsuggestion?.amazonLink && product.priceandsuggestion?.flipkartLink && ' | '}
-                            {product.priceandsuggestion?.flipkartLink && (
-                                <a
-                                    href={product.priceandsuggestion?.flipkartLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    
-                                    Flipkart
-                                </a>
-                            )}
-                        </>
-                    ) : (
-                        'N/A'
-                    )}
-                </td>
-                <td>{product.priceandsuggestion?.recommendation || 'N/A'}</td>
+                 <h2 style={{ textAlign: 'center', color: 'whitesmoke' }}>Pricing and Suggestions</h2>
+          <div className="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th style={{ minWidth: '150px' }}>Name and Price</th>
+                <th style={{ minWidth: '200px' }}>Links</th>
+                <th style={{ minWidth: '200px' }}>Suggestions</th>
             </tr>
-        ))}
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            {comparisonData.map((product, index) => (
+                <tr key={index}>
+                    <td data-label="Name and Price">
+                        {product.productName} - {product.priceandsuggestion?.price || 'N/A'}
+                    </td>
+                    <td data-label="Links">
+                        {product.priceandsuggestion?.amazonLink && (
+                            <a
+                                href={product.priceandsuggestion?.amazonLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#1e90ff' }}
+                            >
+                                Amazon
+                            </a>
+                        )}
+                        {product.priceandsuggestion?.amazonLink && product.priceandsuggestion?.flipkartLink && ' | '}
+                        {product.priceandsuggestion?.flipkartLink && (
+                            <a
+                                href={product.priceandsuggestion?.flipkartLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#1e90ff' }}
+                            >
+                                Flipkart
+                            </a>
+                        )}
+                    </td>
+                    <td data-label="Suggestions">
+                        {product.priceandsuggestion?.recommendation || 'N/A'}
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
                     <small
                         style={{
                             fontStyle: 'italic',
