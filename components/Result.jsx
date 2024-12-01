@@ -274,39 +274,45 @@ const Result = () => {
             index < comparisonData.length - 1 ? `${product.productName} vs ` : product.productName
         )}
     </h2>
+  <div className="table-wrapper">
     <table>
         <thead>
             <tr>
-                <th>Feature</th>
+                <th style={{ minWidth: '150px' }}>Feature</th>
                 {comparisonData.map((product, index) => (
-                    <th key={index}>{product.productName}</th>
+                    <th key={index} style={{ minWidth: '200px' }}>{product.productName}</th>
                 ))}
             </tr>
         </thead>
-       <tbody style = {{textAlign: 'center'}}>
-    {comparisonData[0]?.specifications &&
-        Object.keys(comparisonData[0].specifications).map((category) => (
-            <React.Fragment key={category}>
-                {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
-                    <tr key={`${category}-${feature}`}>
-                        <td data-label="Feature">{feature}</td>
-                        {comparisonData.map((product, index) => {
-                            const value = product.specifications[category]?.[feature];
-                            return (
-                                <td key={index} data-label={product.productName}>
-                                    {/* Handle objects gracefully */}
-                                    {typeof value === 'object' && value !== null
-                                        ? JSON.stringify(value) // or a custom formatter
-                                        : value || 'N/A'}
-                                </td>
-                            );
-                        })}
-                    </tr>
+        <tbody>
+            {comparisonData[0]?.specifications &&
+                Object.keys(comparisonData[0].specifications).map((category) => (
+                    <React.Fragment key={category}>
+                        {Object.keys(comparisonData[0].specifications[category]).map((feature) => (
+                            <tr key={`${category}-${feature}`}>
+                                <td data-label="Feature" style={{ fontWeight: 'bold' }}>{feature}</td>
+                                {comparisonData.map((product, index) => {
+                                    const value = product.specifications[category]?.[feature];
+                                    return (
+                                        <td
+                                            key={index}
+                                            data-label={product.productName}
+                                            style={{ textAlign: 'center' }}
+                                        >
+                                            {typeof value === 'object' && value !== null
+                                                ? JSON.stringify(value)
+                                                : value || 'N/A'}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                    </React.Fragment>
                 ))}
-            </React.Fragment>
-        ))}
-</tbody>
+        </tbody>
     </table>
+</div>
+
 
     {/* Pricing and Suggestions Table */}
 <h2 style={{ textAlign: 'center', color: 'whitesmoke' }}>Pricing and Suggestions</h2>
